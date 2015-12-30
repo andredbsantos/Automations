@@ -8,7 +8,7 @@ screw-you-pingdom.rb => Check if server is online, if not, sends you an email (m
 ruby screw-you-pingdom.rb 127.0.0.1
 ```
 
-Install the following gems: ```sh gem install dotenv twilio-ruby gmail net/ping```
+Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping```
 
 ## Crons
 
@@ -19,5 +19,7 @@ Install the following gems: ```sh gem install dotenv twilio-ruby gmail net/ping`
 
 ## Changelog
 
+```sh
 2015-12-29 - Added screw-you-pingdom.rb
 2015-12-30 - Added logs and cron job to screw-you-pingdom.rb
+```
