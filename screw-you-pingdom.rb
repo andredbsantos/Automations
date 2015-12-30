@@ -27,12 +27,13 @@ SERVER_IP           = ARGV[0]
 
 # Error Settings
 errors              = false
-error_msg           = "Check server (" + SERVER_IP + ")! Shit just hit the fan!\n\n"
-error_subject       = "URGENT! " + SERVER_IP + " is down!"
+error_msg           = "Check server (#{SERVER_IP})! Shit just hit the fan!"
+error_subject       = "URGENT! #{SERVER_IP} is down!"
 
 # Are you there sucker?
 def ping_it
   if not Net::Ping::External.new(SERVER_IP).ping
+    log_this("Unable to ping #{SERVER_IP}")
     return true
   end
 end
@@ -44,6 +45,7 @@ def email_me(error_subject, error_msg)
     subject error_subject
     body    error_msg
   end
+  log_this("Email sent to #{EMERGENCY_EMAIL}")
 end
 
 # Mark the sent email as Urgent!
@@ -51,6 +53,7 @@ def mark_urgent
   Emergency.inbox.find(:unread, from: SENDER_EMAIL).each do |email|
     email.label("Urgent")     
   end
+  log_this("Email marked as Urgent on #{EMERGENCY_EMAIL}")
 end
 
 # Well...better get on the terminal right? SMS Me!
@@ -60,6 +63,7 @@ def sms_me(error_subject)
     to:     MY_NUMBER, 
     body:   error_subject
   )
+  log_this("SMS sent to #{MY_NUMBER}")
 end
 
 # Runner!
@@ -71,6 +75,11 @@ def run(error_subject, error_msg)
     mark_urgent()
     sms_me(error_subject)
   end
+end
+
+# Logger
+def log_this(msg)
+  puts "#{Time.now}: #{msg}"
 end
 
 # Run this!
