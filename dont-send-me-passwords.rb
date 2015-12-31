@@ -10,6 +10,7 @@ EMAIL 		        = "your_email@host.com"
 PASSWORD 	        = "you_password"
 CHECKER 	        = Gmail.connect(EMAIL, PASSWORD)
 
+# Other important constants
 PASSWORDS_REGEX 	= /password|pass|pwd/i
 COMPANY_HOST 		= "company.com"
 
