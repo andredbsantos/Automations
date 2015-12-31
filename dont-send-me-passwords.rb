@@ -6,9 +6,9 @@ require 'gmail'
 Dotenv.load
 
 # Gmail Stuff
-EMAIL 				= "your_email@host.com"
-PASSWORD 			= "you_password"
-CHECKER 			= Gmail.connect(EMAIL, PASSWORD)
+EMAIL 		        = "your_email@host.com"
+PASSWORD 	        = "you_password"
+CHECKER 	        = Gmail.connect(EMAIL, PASSWORD)
 
 PASSWORDS_REGEX 	= /password|pass|pwd/i
 COMPANY_HOST 		= "company.com"
