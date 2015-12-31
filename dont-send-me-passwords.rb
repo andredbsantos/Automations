@@ -31,13 +31,13 @@ end
 CHECKER.inbox.find(:unread).each do |email|
   if email.body.raw_source[PASSWORDS_REGEX] && email.from[0]['host'] == COMPANY_HOST
 
-	# Get stupid email
-	stupid_email	= email.from[0]['mailbox'] + "@" + email.from[0]['host']
+    # Get stupid email
+    stupid_email	= email.from[0]['mailbox'] + "@" + email.from[0]['host']
 
-	# Log stupidity
-	log_this("#{email.from[0]['name']} - (#{stupid_email}) was stupid enough to talk about passwords using email...")
+    # Log stupidity
+    log_this("#{email.from[0]['name']} - (#{stupid_email}) was stupid enough to talk about passwords using email...")
 
-  	# Mark as read, label the stupidity
+    # Mark as read, label the stupidity
     email.read!
     email.label('Stupid Stuff')
 
