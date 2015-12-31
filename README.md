@@ -1,7 +1,12 @@
 # Life Automations
 
-screw-you-pingdom.rb => Check if server is online, if not, sends you an email (marks as Urgent) and sends you an SMS.
-dont-send-me-passwords.rb => Checks if you got someone stupid in your company sending you emails asking for passwords in plain text.
+```sh
+screw-you-pingdom.rb
+Checks if server is online, if not, sends you an email (marks as Urgent) and sends you an SMS.
+
+dont-send-me-passwords.rb
+Checks if you got someone stupid in your company sending you emails asking for passwords in plain text.
+```
 
 ## Usage
 
