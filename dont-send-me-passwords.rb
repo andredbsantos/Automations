@@ -21,9 +21,9 @@ end
 # Reply to someone who is kinda stupid
 def create_reply(subject, stupid)
   CHECKER.compose do
-    to stupid
-    subject "RE: #{subject}"
-    body "I really hope you're not sending/asking me passwords\nSpecially in plain text...\n\nIf so...come talk to me in person!"
+    to 		    stupid
+    subject     "RE: #{subject}"
+    body 	    "I really hope you're not sending/asking me passwords\nSpecially in plain text...\n\nIf so...come talk to me in person!"
   end
 end
 
