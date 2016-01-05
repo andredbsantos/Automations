@@ -1,8 +1,11 @@
 # Life Automations
 
 ```sh
+sms-with-slack.rb
+Slack bot that uses Twilio to send an SMS to a given phone number.
+
 screw-you-pingdom.rb
-Checks if server is online, if not, sends you an email (marks as Urgent) and sends you an SMS.
+Checks if server is online, if not, sends you an email (marks as Urgent) and sends you an SMS using Twilio.
 
 dont-send-me-passwords.rb
 Checks if you got someone stupid in your company sending you emails asking for passwords in plain text.
@@ -11,11 +14,12 @@ Checks if you got someone stupid in your company sending you emails asking for p
 ## Usage
 
 ```sh
+ruby sms-with-slack.rb
 ruby screw-you-pingdom.rb 127.0.0.1
 ruby dont-send-me-passwords.rb
 ```
 
-Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping```
+Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib```
 
 ## Crons
 
@@ -30,9 +34,10 @@ Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping```
 ## Changelog
 
 ```sh
-2015-12-29 - Added screw-you-pingdom.rb
-2015-12-30 - Added logs and cron job to screw-you-pingdom.rb
+2016-01-05 - Added sms-with-slack.rb
 2015-12-31 - Added dont-send-me-passwords.rb
+2015-12-30 - Added logs and cron job to screw-you-pingdom.rb
+2015-12-29 - Added screw-you-pingdom.rb
 ```
 
 ## TODO
