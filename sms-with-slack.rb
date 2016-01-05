@@ -12,13 +12,13 @@ config.token        = SLACK_TOKEN
 end
 
 # Twilio Stuff
-TWILIO_NUMBER		= "+15005550006"
-TWILIO_ACCOUNT_SID	= "AC712b324e706b43931df20c86728f3ddc5"
-TWILIO_AUTH_TOKEN	= "f4884f79955a2dd4bea48994964404a8a"
+TWILIO_NUMBER       = "+15005550006"
+TWILIO_ACCOUNT_SID  = "AC712b324e706b43931df20c86728f3ddc5"
+TWILIO_AUTH_TOKEN   = "f4884f79955a2dd4bea48994964404a8a"
 @twilio             = Twilio::REST::Client.new TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 
 # Init Slack Client
-SLACK_CLIENT = Slack::RealTime::Client.new
+SLACK_CLIENT        = Slack::RealTime::Client.new
 SLACK_CLIENT.on :hello do
     log_this("Connected! Start sending SMS from " + TWILIO_NUMBER + "!")
 end
