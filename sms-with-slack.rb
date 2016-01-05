@@ -67,7 +67,6 @@ SLACK_CLIENT.on :message do |data|
 		when /^bot/ then
 			msgSlack(data['channel'], "*What?, type 'HELP'!*")
 	end	
-
 end
 
 SLACK_CLIENT.start!
