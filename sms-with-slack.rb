@@ -5,10 +5,10 @@ require "slack-ruby-client"
 require "phonelib"
 
 # Slack Stuff
-SLACK_TOKEN			= "xoxb-177606212122421-Cf0qz5Az0gn4xBoBhnLZRsqM"
+SLACK_TOKEN         = "xoxb-177606212122421-Cf0qz5Az0gn4xBoBhnLZRsqM"
 
 Slack.configure do |config|
-config.token 		= SLACK_TOKEN
+config.token        = SLACK_TOKEN
 end
 
 # Twilio Stuff
