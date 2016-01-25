@@ -26,7 +26,6 @@ TWILIO_AUTH_TOKEN   = "f4884f79955a2dd4bea48994964404a8a"
 SERVER_IP           = ARGV[0]
 
 # Error Settings
-errors              = false
 error_msg           = "Check server (#{SERVER_IP})! Shit just hit the fan!"
 error_subject       = "URGENT! #{SERVER_IP} is down!"
 
