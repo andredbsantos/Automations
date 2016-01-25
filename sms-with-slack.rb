@@ -39,7 +39,7 @@ def sms(number, message)
 end
 
 # Message on Slack
-def msgSlack(channel, message)
+def msg_slack(channel, message)
     SLACK_CLIENT.message channel: channel, text: message
 end
 
@@ -55,17 +55,17 @@ SLACK_CLIENT.on :message do |data|
     case content.first
         when "SMS" then 
             unless Phonelib.valid?(number) and message
-                msgSlack(data['channel'], "*Something went wrong, check the number and message...*")
+                msg_slack(data['channel'], "*Something went wrong, check the number and message...*")
                 log_this("Error sending message (#{message}) to #{number} from #{data['user']}!")
             else
                 sms(number, message)
-                msgSlack(data['channel'], "*Message sent to #{number} - #{message}*")			
+                msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")			
                 log_this("Message (#{message}) sent to #{number} from #{data['user']}!")
             end
         when "HELP" then
-            msgSlack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")
+            msg_slack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")
         when /^bot/ then
-            msgSlack(data['channel'], "*What?, type 'HELP'!*")
+            msg_slack(data['channel'], "*What?, type 'HELP'!*")
     end
 end
 
