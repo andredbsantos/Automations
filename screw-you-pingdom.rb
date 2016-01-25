@@ -31,7 +31,7 @@ error_subject       = "URGENT! #{SERVER_IP} is down!"
 
 # Are you there sucker?
 def ping_it
-  if not Net::Ping::External.new(SERVER_IP).ping
+  unless Net::Ping::External.new(SERVER_IP).ping
     log_this("Unable to ping #{SERVER_IP}")
     return true
   end
