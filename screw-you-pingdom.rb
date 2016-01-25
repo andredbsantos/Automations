@@ -29,7 +29,7 @@ SERVER_IP           = ARGV[0]
 error_msg           = "Check server (#{SERVER_IP})! Shit just hit the fan!"
 error_subject       = "URGENT! #{SERVER_IP} is down!"
 
-# Are you there sucker?
+# Are you there?
 def ping_it
   unless Net::Ping::External.new(SERVER_IP).ping
     log_this("Unable to ping #{SERVER_IP}")
