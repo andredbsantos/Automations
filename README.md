@@ -1,6 +1,9 @@
 # Life Automations
 
 ```sh
+clean-my-slack.rb
+Cleans the files you uploaded to Slack to avoid getting to the file limit.
+
 sms-with-slack.rb
 Slack bot that uses Twilio to send an SMS to a given phone number.
 
@@ -14,12 +17,13 @@ Checks if you got someone stupid in your company sending you emails asking for p
 ## Usage
 
 ```sh
+ruby clean-my-slack.rb DAYS_AGO PAGE SLACK_TOKEN
 ruby sms-with-slack.rb
 ruby screw-you-pingdom.rb 127.0.0.1
 ruby dont-send-me-passwords.rb
 ```
 
-Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib```
+Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib json uri net/http```
 
 ## Crons
 
@@ -34,6 +38,7 @@ Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping sla
 ## Changelog
 
 ```sh
+2016-02-08 - Added clean-my-slack.rb
 2016-01-05 - Added sms-with-slack.rb
 2015-12-31 - Added dont-send-me-passwords.rb
 2015-12-30 - Added logs and cron job to screw-you-pingdom.rb
