@@ -31,8 +31,8 @@ end
 # SMS Method!
 def sms(number, message)
     @twilio.messages.create(
-        from:   TWILIO_NUMBER, 
-        to:     number, 
+        from:   TWILIO_NUMBER,
+        to:     number,
         body:   message
     )
     log_this("SMS sent to #{number} - #{message}")
@@ -45,26 +45,26 @@ end
 
 # Watch messages on Slack and react!
 SLACK_CLIENT.on :message do |data|
-    
+
     # Take care of data
     content			= data['text'].split(" ", 3)
     number			= content[1].nil? ? false : content[1]
     message			= content[2].nil? ? false : content.last
-    
+
     # Commands
-    case content.first
-        when "SMS" then 
-            unless Phonelib.valid?(number) and message
+    case
+        when content.first == "SMS"
+            unless Phonelib.valid?(number) && message
                 msg_slack(data['channel'], "*Something went wrong, check the number and message...*")
                 log_this("Error sending message (#{message}) to #{number} from #{data['user']}!")
             else
                 sms(number, message)
-                msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")			
+                msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")
                 log_this("Message (#{message}) sent to #{number} from #{data['user']}!")
             end
-        when "HELP" then
+        when content.first == "HELP"
             msg_slack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")
-        when /^bot/ then
+        when content.first == /^bot/
             msg_slack(data['channel'], "*What?, type 'HELP'!*")
     end
 end

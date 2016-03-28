@@ -31,54 +31,50 @@ error_subject       = "URGENT! #{SERVER_IP} is down!"
 
 # Are you there?
 def ping_it
-  unless Net::Ping::External.new(SERVER_IP).ping
+    return true unless Net::Ping::External.new(SERVER_IP).ping
     log_this("Unable to ping #{SERVER_IP}")
-    return true
-  end
 end
 
 # Email me!
 def email_me(error_subject, error_msg)
-  Sender.deliver do
-    to      EMERGENCY_EMAIL
-    subject error_subject
-    body    error_msg
-  end
-  log_this("Email sent to #{EMERGENCY_EMAIL}")
+    Sender.deliver do
+        to      EMERGENCY_EMAIL
+        subject error_subject
+        body    error_msg
+    end
+    log_this("Email sent to #{EMERGENCY_EMAIL}")
 end
 
 # Mark the sent email as Urgent!
 def mark_urgent
-  Emergency.inbox.find(:unread, from: SENDER_EMAIL).each do |email|
-    email.label("Urgent")     
-  end
-  log_this("Email marked as Urgent on #{EMERGENCY_EMAIL}")
+    Emergency.inbox.find(:unread, from: SENDER_EMAIL).each do |email|
+        email.label("Urgent")
+    end
+    log_this("Email marked as Urgent on #{EMERGENCY_EMAIL}")
 end
 
 # Well...better get on the terminal right? SMS Me!
 def sms_me(error_subject)
-  @twilio.messages.create(
-    from:   TWILIO_NUMBER, 
-    to:     MY_NUMBER, 
-    body:   error_subject
-  )
-  log_this("SMS sent to #{MY_NUMBER}")
+    @twilio.messages.create(
+        from:   TWILIO_NUMBER,
+        to:     MY_NUMBER,
+        body:   error_subject
+    )
+    log_this("SMS sent to #{MY_NUMBER}")
 end
 
 # Runner!
 def run(error_subject, error_msg)
-  errors = ping_it
-  if errors
+    return unless ping_it
     email_me(error_subject, error_msg)
     sleep(2)
-    mark_urgent()
+    mark_urgent
     sms_me(error_subject)
-  end
 end
 
 # Logger
 def log_this(msg)
-  puts "#{Time.now}: #{msg}"
+    puts "#{Time.now}: #{msg}"
 end
 
 # Run this!
