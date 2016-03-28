@@ -6,18 +6,18 @@ require 'uri'
 
 # Get token at https://api.slack.com/web#authentication
 @token = ARGV[2]
+how_long_ago = (Time.now - ARGV[0].to_i * 24 * 60 * 60).to_i
+params = {
+    token: @token,          # Your Token
+    ts_from: 0,             # From (timestamp)
+    ts_to: how_long_ago,    # To (timestamp)
+    types: 'all',           # File Types
+    count: 1000,            # Items per page
+    page: ARGV[1]           # Page
+}
 
 # List the files!
-def list_files
-    how_long_ago = (Time.now - ARGV[0].to_i * 24 * 60 * 60).to_i
-    params = {
-        token: @token,          # Your Token
-        ts_from: 0,             # From (timestamp)
-        ts_to: how_long_ago,    # To (timestamp)
-        types: 'all',           # File Types
-        count: 1000,            # Items per page
-        page: ARGV[1]           # Page
-    }
+def list_files(params)
     parsed_response = parse_call('https://slack.com/api/files.list', params)
     parsed_response['files']
 end
@@ -44,7 +44,7 @@ end
 
 puts "Getting files and ids..."
 
-files       = list_files
+files       = list_files(params)
 file_ids    = files.map { |f| f['id'] }
 
 puts "#{files.count} files found!"
