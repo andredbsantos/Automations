@@ -8,7 +8,7 @@ require 'uri'
 @token = ARGV[2]
 
 # List the files!
-def list_them_files
+def list_files
     how_long_ago = (Time.now - ARGV[0].to_i * 24 * 60 * 60).to_i
     params = {
         token: @token,          # Your Token
@@ -25,7 +25,7 @@ def list_them_files
 end
 
 # Delete the files!
-def delete_them_files(file_ids)
+def delete_files(file_ids)
     file_ids.each do |file_id|
         params = {
             token: @token,
@@ -40,12 +40,12 @@ end
 
 puts "Getting files and ids..."
 
-files       = list_them_files
+files       = list_files
 file_ids    = files.map { |f| f['id'] }
 
 puts "#{files.count} files found!"
 puts "Deleting #{files.count} files..."
 
-delete_them_files(file_ids)
+delete_files(file_ids)
 
 puts "Done!"
