@@ -1,4 +1,4 @@
-# Life Automations
+# Life Automations [![Codacy Badge](https://api.codacy.com/project/badge/grade/8fe531631b424c1b876c2bf6c06b90b8)](https://www.codacy.com/app/wildlifechorus/Automations)
 
 ```sh
 clean-my-slack.rb
