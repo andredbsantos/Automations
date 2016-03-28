@@ -18,10 +18,8 @@ def list_files
         count: 1000,            # Items per page
         page: ARGV[1]           # Page
     }
-    uri = URI.parse('https://slack.com/api/files.list')
-    uri.query = URI.encode_www_form(params)
-    response = Net::HTTP.get_response(uri)
-    JSON.parse(response.body)['files']
+    parsed_response = parse_call('https://slack.com/api/files.list', params)
+    parsed_response['files']
 end
 
 # Delete the files!
@@ -31,11 +29,17 @@ def delete_files(file_ids)
             token: @token,
             file: file_id
         }
-        uri = URI.parse('https://slack.com/api/files.delete')
-        uri.query = URI.encode_www_form(params)
-        response = Net::HTTP.get_response(uri)
-        puts "#{file_id}: #{JSON.parse(response.body)['ok']}"
+        delete_response = parse_call('https://slack.com/api/files.delete', params)
+        puts "#{file_id}: #{delete_response['ok']}"
     end
+end
+
+# Parse and call URI
+def parse_call(url, params)
+    uri = URI.parse(url)
+    uri.query = URI.encode_www_form(params)
+    response = Net::HTTP.get_response(uri)
+    JSON.parse(response.body)
 end
 
 puts "Getting files and ids..."
