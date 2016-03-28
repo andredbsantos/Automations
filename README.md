@@ -29,10 +29,10 @@ Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping sla
 
 ```sh
 # Runs `screw_you_pingdom.rb` every 5 minutes.
-*/5 * * * * /path/to/automations/screw-you-pingdom.rb 127.0.0.1 >> /path/to/automations/logs/screw_you_pingdom.log 2>&1
+*/5 * * * * /path/to/automations/screw_you_pingdom.rb 127.0.0.1 >> /path/to/automations/logs/screw_you_pingdom.log 2>&1
 
 # Runs `dont_send_me_passwords.rb` every 30 minutes.
-*/30 * * * * /path/to/automations/dont-send-me-passwords.rb >> /path/to/automations/logs/dont_send_me_passwords.log 2>&1
+*/30 * * * * /path/to/automations/dont_send_me_passwords.rb >> /path/to/automations/logs/dont_send_me_passwords.log 2>&1
 ```
 
 ## Changelog
