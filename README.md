@@ -23,7 +23,8 @@ ruby screw_you_pingdom.rb 127.0.0.1
 ruby dont_send_me_passwords.rb
 ```
 
-Install the following gems: ```gem install dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib json uri net/http```
+Install the following gems:
+```dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib json uri net/http```
 
 ## Crons
 
