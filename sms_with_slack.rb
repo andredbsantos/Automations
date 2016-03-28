@@ -45,27 +45,26 @@ end
 
 # Watch messages on Slack and react!
 SLACK_CLIENT.on :message do |data|
-
     # Take care of data
     content			= data['text'].split(" ", 3)
     number			= content[1].nil? ? false : content[1]
     message			= content[2].nil? ? false : content.last
 
     # Commands
-    case
-        when content.first == "SMS"
-            unless Phonelib.valid?(number) && message
-                msg_slack(data['channel'], "*Something went wrong, check the number and message...*")
-                log_this("Error sending message (#{message}) to #{number} from #{data['user']}!")
-            else
-                sms(number, message)
-                msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")
-                log_this("Message (#{message}) sent to #{number} from #{data['user']}!")
-            end
-        when content.first == "HELP"
-            msg_slack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")
-        when content.first == /^bot/
-            msg_slack(data['channel'], "*What?, type 'HELP'!*")
+    case content.first
+    when "SMS"
+        unless Phonelib.valid?(number) && message
+            msg_slack(data['channel'], "*Something went wrong, check the number and message...*")
+            log_this("Error sending message (#{message}) to #{number} from #{data['user']}!")
+        else
+            sms(number, message)
+            msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")
+            log_this("Message (#{message}) sent to #{number} from #{data['user']}!")
+        end
+    when "HELP"
+        msg_slack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")
+    when /^bot/
+        msg_slack(data['channel'], "*What?, type 'HELP'!*")
     end
 end
 
