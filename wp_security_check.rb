@@ -37,18 +37,17 @@ def update_and_scan(update, scan)
 end
 
 def send_results(site, datetime, report)
-    if File.file?(report)
-        puts "Sending report to #{EMAIL}..."
-        SENDER.deliver do
-            to          'email_to_send_to@gmail.com'
-            subject     "WPScan finished for site #{site} - #{datetime}"
-            body        File.read(report)
-        end
-        puts "-- Report sent!"
-        puts "Deleting report file..."
-        File.delete(report)
-        puts "-- Report deleted!"
+    return unless File.file?(report)
+    puts "Sending report to #{EMAIL}..."
+    SENDER.deliver do
+        to          'email_to_send_to@gmail.com'
+        subject     "WPScan finished for site #{site} - #{datetime}"
+        body        File.read(report)
     end
+    puts "-- Report sent!"
+    puts "Deleting report file..."
+    File.delete(report)
+    puts "-- Report deleted!"
 end
 
 # Runner!
