@@ -38,7 +38,7 @@ end
 
 def send_results(site, datetime, report)
     return unless File.file?(report)
-    puts "Sending report to #{EMAIL}..."
+    puts "Sending report..."
     SENDER.deliver do
         to          'email_to_send_to@gmail.com'
         subject     "WPScan finished for site #{site} - #{datetime}"
