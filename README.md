@@ -2,8 +2,8 @@
 
 ```sh
 wp_security_check.rb
-Automates [WPScan](https://github.com/wpscanteam/wpscan) to send you a Wordpress security scan report to your email.
-You just need to add this file to your [WPScan](https://github.com/wpscanteam/wpscan) folder.
+Automates WPScan to send you a Wordpress security scan report to your email.
+You just need to add this file to your WPScan folder.
 
 clean_my_slack.rb
 Cleans the files you uploaded to Slack to avoid getting to the file limit.
