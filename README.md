@@ -1,6 +1,10 @@
 # Life Automations [![Codacy Badge](https://api.codacy.com/project/badge/grade/8fe531631b424c1b876c2bf6c06b90b8)](https://www.codacy.com/app/wildlifechorus/Automations)
 
 ```sh
+wp_security_check.rb
+Automates [WPScan](https://github.com/wpscanteam/wpscan) to send you a Wordpress security scan report to your email.
+You just need to add this file to your [WPScan](https://github.com/wpscanteam/wpscan) folder.
+
 clean_my_slack.rb
 Cleans the files you uploaded to Slack to avoid getting to the file limit.
 
@@ -17,6 +21,7 @@ Checks if you got someone stupid in your company sending you emails asking for p
 ## Usage
 
 ```sh
+ruby wp_security_check.rb http://your-wordpress-site.com
 ruby clean_my_slack.rb DAYS_AGO PAGE SLACK_TOKEN
 ruby sms_with_slack.rb
 ruby screw_you_pingdom.rb 127.0.0.1
@@ -29,6 +34,9 @@ Install the following gems:
 ## Crons
 
 ```sh
+# Runs `screw_you_pingdom.rb` every day.
+0 0 * * * /path/to/automations/wp_security_check.rb http://your-wordpress-site.com >> /path/to/automations/logs/wp_security_check.log >/dev/null 2>&1
+
 # Runs `screw_you_pingdom.rb` every 5 minutes.
 */5 * * * * /path/to/automations/screw_you_pingdom.rb 127.0.0.1 >> /path/to/automations/logs/screw_you_pingdom.log 2>&1
 
@@ -39,6 +47,7 @@ Install the following gems:
 ## Changelog
 
 ```sh
+2016-03-30 - Added wp_security_check.rb
 2016-02-08 - Added clean_my_slack.rb
 2016-01-05 - Added sms_with_slack.rb
 2015-12-31 - Added dont_send_me_passwords.rb
