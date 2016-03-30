@@ -34,7 +34,7 @@ Install the following gems:
 ## Crons
 
 ```sh
-# Runs `screw_you_pingdom.rb` every day.
+# Runs `wp_security_check.rb` every day.
 0 0 * * * /path/to/automations/wp_security_check.rb http://your-wordpress-site.com >> /path/to/automations/logs/wp_security_check.log >/dev/null 2>&1
 
 # Runs `screw_you_pingdom.rb` every 5 minutes.
