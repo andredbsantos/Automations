@@ -2,7 +2,7 @@
 
 ```sh
 masked_phone_call.rb
-Quick and dirty way to created a masked phone call with Twilio.
+Quick and dirty way to create a masked phone call with Twilio.
 
 wp_security_check.rb
 Automates WPScan to send you a Wordpress security scan report to your email.
