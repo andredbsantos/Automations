@@ -33,7 +33,7 @@ ruby dont_send_me_passwords.rb
 ```
 
 Install the following gems:
-```dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib json uri net/http```
+```dotenv twilio-ruby gmail net/ping slack-ruby-client phonelib json uri net/http colorize```
 
 ## Crons
 

@@ -2,6 +2,7 @@
 # encoding: UTF-8
 
 require 'twilio-ruby'
+require 'colorize'
 
 # TWILIO Stuff
 MY_NUMBER           = '+000123456789'
@@ -17,14 +18,14 @@ TWILIO_AUTH_TOKEN   = "TWILIO_AUTH_TOKEN"
 
 # check if you have any numbers, get the first one and makes the masked call
 if @numbers.any?
-    puts "We'll be using #{@numbers[0].phone_number} as a masked number..."
-    puts "To connect YOU (#{MY_NUMBER}) to #{ARGV[0]}..."
-    puts "Connecting..."
+    puts "We'll be using #{@numbers[0].phone_number} as a masked number...".yellow
+    puts "To connect YOU (#{MY_NUMBER}) to #{ARGV[0]}...".yellow
+    puts "Connecting...".green
     @twilio.account.calls.create(
         :from   => @numbers[0].phone_number,
         :to     => ARGV[0],
         :url    => 'http://twimlets.com/forward?PhoneNumber=' + MY_NUMBER
     )
 else
-    puts "You must purchase a number first!"
+    puts "You must purchase a number first!".red
 end
