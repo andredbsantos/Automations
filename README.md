@@ -1,6 +1,9 @@
 # Life Automations [![Codacy Badge](https://api.codacy.com/project/badge/grade/8fe531631b424c1b876c2bf6c06b90b8)](https://www.codacy.com/app/wildlifechorus/Automations)
 
 ```sh
+masked_phone_call.rb
+Quick and dirty way to created a masked phone call with Twilio.
+
 wp_security_check.rb
 Automates WPScan to send you a Wordpress security scan report to your email.
 You just need to add this file to your WPScan folder.
@@ -21,6 +24,7 @@ Checks if you got someone stupid in your company sending you emails asking for p
 ## Usage
 
 ```sh
+ruby masked_phone_call.rb NUMBER_YOU_WANT_TO_CALL
 ruby wp_security_check.rb http://your-wordpress-site.com
 ruby clean_my_slack.rb DAYS_AGO PAGE SLACK_TOKEN
 ruby sms_with_slack.rb
@@ -47,17 +51,11 @@ Install the following gems:
 ## Changelog
 
 ```sh
+2016-04-06 - Added masked_phone_call.rb
 2016-03-30 - Added wp_security_check.rb
 2016-02-08 - Added clean_my_slack.rb
 2016-01-05 - Added sms_with_slack.rb
 2015-12-31 - Added dont_send_me_passwords.rb
 2015-12-30 - Added logs and cron job to screw_you_pingdom.rb
 2015-12-29 - Added screw_you_pingdom.rb
-```
-
-## TODO
-
-```sh
-1 - Auto happy birthday on Facebook.
-2 - Get DB dump from production and import DB on you local env.
 ```
