@@ -4,6 +4,7 @@
 require "twilio-ruby"
 require "slack-ruby-client"
 require "phonelib"
+require "colorize"
 
 # Slack Stuff
 SLACK_TOKEN         = "xoxb-177606212122421-Cf0qz5Az0gn4xBoBhnLZRsqM"
@@ -21,12 +22,12 @@ TWILIO_AUTH_TOKEN   = "f4884f79955a2dd4bea48994964404a8a"
 # Init Slack Client
 SLACK_CLIENT        = Slack::RealTime::Client.new
 SLACK_CLIENT.on :hello do
-    log_this("Connected! Start sending SMS from " + TWILIO_NUMBER + "!")
+    log_this("Connected! Start sending SMS from " + TWILIO_NUMBER + "!", 'green')
 end
 
 # Logger
-def log_this(msg)
-    puts "#{Time.now}: #{msg.tr('*', '')}"
+def log_this(msg, color)
+    puts "#{Time.now}: #{msg.tr('*', '')}".color
 end
 
 # SMS Method!
@@ -36,7 +37,7 @@ def sms(number, message)
         to:     number,
         body:   message
     )
-    log_this("SMS sent to #{number} - #{message}")
+    log_this("SMS sent to #{number} - #{message}", 'green')
 end
 
 # Message on Slack
@@ -56,11 +57,11 @@ SLACK_CLIENT.on :message do |data|
     when "SMS"
         unless Phonelib.valid?(number) && message
             msg_slack(data['channel'], "*Something went wrong, check the number and message...*")
-            log_this("Error sending message (#{message}) to #{number} from #{data['user']}!")
+            log_this("Error sending message (#{message}) to #{number} from #{data['user']}!", 'red')
         else
             sms(number, message)
             msg_slack(data['channel'], "*Message sent to #{number} - #{message}*")
-            log_this("Message (#{message}) sent to #{number} from #{data['user']}!")
+            log_this("Message (#{message}) sent to #{number} from #{data['user']}!", 'green')
         end
     when "HELP"
         msg_slack(data['channel'], "*Usage: SMS +351917723456 Message you want to send*")

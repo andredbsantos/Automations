@@ -4,6 +4,7 @@
 require 'dotenv'
 require 'gmail'
 require 'date'
+require 'colorize'
 
 Dotenv.load
 
@@ -27,32 +28,32 @@ end
 
 # Functions
 def update_and_scan(update, scan)
-    puts "Updating WPScan Database..."
+    puts "Updating WPScan Database...".yellow
     update.join
-    puts "-- Update complete!"
+    puts "-- Update complete!".green
 
-    puts "Scan started..."
+    puts "Scan started...".yellow
     scan.join
-    puts "-- Scan complete!"
+    puts "-- Scan complete!".green
 end
 
 def send_results(site, datetime, report)
     return unless File.file?(report)
-    puts "Sending report..."
+    puts "Sending report...".yellow
     SENDER.deliver do
         to          'email_to_send_to@gmail.com'
         subject     "WPScan finished for site #{site} - #{datetime}"
         body        File.read(report)
     end
-    puts "-- Report sent!"
-    puts "Deleting report file..."
+    puts "-- Report sent!".green
+    puts "Deleting report file...".yellow
     File.delete(report)
-    puts "-- Report deleted!"
+    puts "-- Report deleted!".green
 end
 
 # Runner!
 update_and_scan(update_wpscan, scan_wp)
 send_results(SITE, Time.now.strftime("%d/%m/%Y %H:%M"), REPORT)
-puts "-----------------------"
-puts "#{Time.now.strftime("%d/%m/%Y %H:%M")} - Done!"
-puts "-----------------------"
+puts "-----------------------".yellow
+puts "#{Time.now.strftime("%d/%m/%Y %H:%M")} - Done!".green
+puts "-----------------------".yellow

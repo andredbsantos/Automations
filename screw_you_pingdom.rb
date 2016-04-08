@@ -5,6 +5,7 @@ require 'net/ping'
 require 'dotenv'
 require 'gmail'
 require 'twilio-ruby'
+require 'colorize'
 
 Dotenv.load
 
@@ -33,7 +34,7 @@ error_subject       = "URGENT! #{SERVER_IP} is down!"
 # Are you there?
 def ping_it
     return true unless Net::Ping::External.new(SERVER_IP).ping
-    log_this("Unable to ping #{SERVER_IP}")
+    log_this("Unable to ping #{SERVER_IP}", 'red')
 end
 
 # Email me!
@@ -43,7 +44,7 @@ def email_me(error_subject, error_msg)
         subject error_subject
         body    error_msg
     end
-    log_this("Email sent to #{EMERGENCY_EMAIL}")
+    log_this("Email sent to #{EMERGENCY_EMAIL}", 'green')
 end
 
 # Mark the sent email as Urgent!
@@ -51,7 +52,7 @@ def mark_urgent
     Emergency.inbox.find(:unread, from: SENDER_EMAIL).each do |email|
         email.label("Urgent")
     end
-    log_this("Email marked as Urgent on #{EMERGENCY_EMAIL}")
+    log_this("Email marked as Urgent on #{EMERGENCY_EMAIL}", 'yellow')
 end
 
 # Well...better get on the terminal right? SMS Me!
@@ -61,7 +62,7 @@ def sms_me(error_subject)
         to:     MY_NUMBER,
         body:   error_subject
     )
-    log_this("SMS sent to #{MY_NUMBER}")
+    log_this("SMS sent to #{MY_NUMBER}", 'green')
 end
 
 # Runner!
@@ -74,8 +75,8 @@ def run(error_subject, error_msg)
 end
 
 # Logger
-def log_this(msg)
-    puts "#{Time.now}: #{msg}"
+def log_this(msg, color)
+    puts "#{Time.now}: #{msg}".color
 end
 
 # Run this!

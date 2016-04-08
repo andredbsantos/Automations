@@ -4,6 +4,7 @@
 require 'net/http'
 require 'json'
 require 'uri'
+require 'colorize'
 
 # Get token at https://api.slack.com/web#authentication
 @token = ARGV[2]
@@ -31,7 +32,7 @@ def delete_files(file_ids)
             file: file_id
         }
         delete_response = parse_call('https://slack.com/api/files.delete', params)
-        puts "#{file_id}: #{delete_response['ok']}"
+        puts "#{file_id}: #{delete_response['ok']}".green
     end
 end
 
@@ -43,13 +44,13 @@ def parse_call(url, params)
     JSON.parse(response.body)
 end
 
-puts "Getting files and ids..."
+puts "Getting files and ids...".yellow
 
 files       = list_files(params)
 file_ids    = files.map { |f| f['id'] }
 
-puts "#{files.count} files found!"
-puts "Deleting #{files.count} files..."
+puts "#{files.count} files found!".yellow
+puts "Deleting #{files.count} files...".green
 
 delete_files(file_ids)
 

@@ -3,6 +3,7 @@
 
 require 'dotenv'
 require 'gmail'
+require 'colorize'
 
 Dotenv.load
 
@@ -17,7 +18,7 @@ COMPANY_HOST 		= "company.com"
 
 # Logger
 def log_this(msg)
-  puts "#{Time.now}: #{msg}"
+  puts "#{Time.now}: #{msg}".red
 end
 
 # Reply to someone who is kinda stupid
